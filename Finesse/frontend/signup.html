@@ -1,0 +1,46 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Create Atelier · Laleh</title>
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="apple-touch-icon" href="assets/favicon.svg">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/finesse.css">
+</head><body>
+<main class="auth-page">
+  <aside class="auth-art">
+    <h2>Begin your <span>luxury archive</span>. Curated by you, perfected by AI.</h2>
+  </aside>
+  <section class="auth-form-wrap">
+    <form class="auth-form" onsubmit="doSignup(event)">
+      <a href="index.html" class="logo">LA<span style="color:var(--accent)">LEH</span></a>
+      <h1>Create your atelier.</h1>
+      <p class="sub">Your wardrobe, reimagined.</p>
+      <div class="msg"></div>
+      <div class="field"><label>Full name</label><input type="text" name="name" required maxlength="100" pattern="[A-Za-z][A-Za-z\s'-]{1,98}"></div>
+      <div class="field"><label>Email</label><input type="email" name="email" required></div>
+      <div class="field">
+        <label>Password (min 6)</label>
+        <input id="pw" type="password" name="password" minlength="6" maxlength="64" required>
+        <div class="pw-meter" aria-label="Password strength">
+          <div class="pw-bar" id="pw-bar"></div>
+        </div>
+        <div class="pw-label" id="pw-label">Strength: —</div>
+      </div>
+      <div class="field">
+        <label>Captcha</label>
+        <div class="captcha-row" id="captcha-row">
+          <div class="captcha-q" id="captcha-q">—</div>
+          <input id="captcha-a" type="text" name="captcha" inputmode="numeric" autocomplete="off" placeholder="Answer" required>
+          <button class="btn btn-ghost" type="button" onclick="refreshCaptcha()" style="padding:.55rem .9rem">↻</button>
+        </div>
+        <div id="recaptcha" style="margin-top:.75rem"></div>
+      </div>
+      <button class="btn btn-gold">Begin →</button>
+      <p class="alt">Already a member? <a href="login.html">Sign in</a></p>
+    </form>
+  </section>
+</main>
+<div id="floating-slot"></div>
+<script src="js/finesse.js"></script>
+<script src="js/auth.js"></script>
+</body></html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Planner · Laleh</title>
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/finesse.css">
+</head><body>
+<div class="app-shell">
+  <div id="sidebar-slot"></div>
+  <main class="app-main">
+    <div class="app-top">
+      <div><span class="eyebrow">Schedule</span><h1>Planner & Location</h1>
+        <div class="dt-widget" id="dt-widget"></div>
+      </div>
+      <div class="right">
+        <button type="button" class="btn-icon" onclick="toggleTheme()" title="Toggle theme" aria-label="Toggle theme">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M12 3a6 6 0 1 0 0 18 6 6 0 0 0 0-18Zm0 0v4M12 21v-4M3 12h4M17 12h4"/></svg>
+        </button>
+        <button class="btn btn-gold" onclick="randomOutfit()">✦ Random Look</button>
+      </div>
+    </div>
+
+    <div class="planner-grid">
+      <div>
+        <div class="calendar">
+          <div class="cal-head">
+            <button class="btn-icon" onclick="shiftMonth(-1)">‹</button>
+            <h3 id="cal-month"></h3>
+            <button class="btn-icon" onclick="shiftMonth(1)">›</button>
+          </div>
+          <div class="cal-grid" id="cal-grid"></div>
+        </div>
+
+        <div class="card" style="margin-top:1.5rem">
+          <div class="section-title"><h2>Recent plans</h2></div>
+          <div id="entries"></div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:1.2rem">
+        <div class="weather-card">
+          <div class="city" id="w-city">—</div>
+          <div class="t" id="w-temp">—</div>
+          <div style="text-transform:capitalize" id="w-cond">—</div>
+          <div style="display:flex;gap:.5rem;margin-top:1rem">
+            <input id="city-input" placeholder="City" style="flex:1;padding:.5rem .8rem;border-radius:8px;border:1px solid rgba(0,0,0,.15);background:rgba(255,255,255,.4)">
+            <button class="btn btn-primary" onclick="loadWeather()" style="padding:.5rem 1rem">Set</button>
+            <button class="btn btn-ghost" onclick="useCurrentLocationWeather()" style="padding:.5rem .9rem">Use location</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="section-title"><h2 style="font-size:1.2rem">Weather suggests</h2></div>
+          <div id="suggest" style="display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem"></div>
+        </div>
+
+        <div class="card" style="padding:0;overflow:hidden">
+          <iframe id="planner-map" title="Map" style="width:100%;height:200px;border:0;display:block"
+            src="https://maps.google.com/maps?q=London&z=11&output=embed"></iframe>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<div class="modal" id="plan-modal">
+  <div class="box">
+    <h3>Plan a look</h3>
+    <form onsubmit="submitPlan(event)">
+      <div class="field"><label>Date</label><input type="date" id="plan-date" name="date" required></div>
+      <div class="field"><label>Outfit</label>
+        <select id="plan-outfit" name="outfit_id" style="width:100%;padding:.9rem 1rem;border-radius:12px;border:1px solid var(--border);background:transparent;color:var(--text)"></select>
+      </div>
+      <div class="field"><label>Note</label><input name="note" placeholder="e.g. dinner with M."></div>
+      <div style="display:flex;gap:.5rem;margin-top:1rem">
+        <button type="button" class="btn btn-ghost" onclick="closePlan()" style="flex:1;justify-content:center">Cancel</button>
+        <button class="btn btn-gold" style="flex:1;justify-content:center">Save Plan</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div id="floating-slot"></div>
+<script src="js/finesse.js"></script>
+<script>document.getElementById('sidebar-slot').outerHTML = F.renderChrome('planner');</script>
+<script src="js/planner.js"></script>
+</body></html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact Us · Laleh</title>
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/finesse.css">
+</head>
+<body>
+<div class="loader"><div class="l-logo">LA<span>LEH</span></div><div class="bar"></div></div>
+
+<nav class="nav">
+  <a href="index.html" class="logo">LA<span>LEH</span></a>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contactus.html">Contact</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button type="button" class="btn-icon" onclick="toggleTheme()" title="Toggle theme" aria-label="Toggle theme">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M12 3a6 6 0 1 0 0 18 6 6 0 0 0 0-18Zm0 0v4M12 21v-4M3 12h4M17 12h4"/></svg>
+    </button>
+    <a href="login.html" class="btn btn-ghost">Sign in</a>
+    <a href="signup.html" class="btn btn-primary">Get Started</a>
+  </div>
+</nav>
+
+<section style="padding-top:9rem">
+  <div class="container" style="max-width:860px">
+    <span class="eyebrow">Contact Us</span>
+    <h1 style="margin-top:1rem">Tell us what you think.</h1>
+    <p class="muted" style="margin-top:1rem">
+      Share product feedback, feature ideas, or support questions. Your message is sent to the Laleh feedback system.
+    </p>
+
+    <div class="card" style="margin-top:2rem">
+      <form id="contact-form">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+          <div class="field">
+            <label>Name</label>
+            <input id="name" type="text" maxlength="100" placeholder="Your name (optional)">
+          </div>
+          <div class="field">
+            <label>Email</label>
+            <input id="email" type="email" maxlength="150" placeholder="you@example.com (optional)">
+          </div>
+        </div>
+        <div class="field">
+          <label>Subject</label>
+          <input id="subject" type="text" maxlength="120" placeholder="What is this about? (optional)">
+        </div>
+        <div class="field">
+          <label>Message</label>
+          <textarea id="message" rows="8" maxlength="2500" placeholder="Write your feedback..." style="width:100%;padding:.9rem 1rem;border-radius:12px;border:1px solid var(--border);background:transparent;color:var(--text);resize:vertical" required></textarea>
+        </div>
+        <div class="msg" id="contact-msg"></div>
+        <button class="btn btn-gold" type="submit">Send message</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-grid">
+    <div>
+      <div style="font-family:var(--font-display);font-size:1.6rem;letter-spacing:.35em">LA<span style="color:var(--accent)">LEH</span></div>
+      <p class="muted" style="margin-top:1rem;max-width:300px;font-size:.9rem">A luxury digital atelier for the modern wardrobe.</p>
+    </div>
+    <div><h4>Navigate</h4><ul><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="contactus.html">Contact</a></li></ul></div>
+    <div><h4>Studio</h4><ul><li><a href="closet.html">Closet</a></li><li><a href="diva.html">Diva Studio</a></li><li><a href="planner.html">Planner</a></li></ul></div>
+    <div><h4>Account</h4><ul><li><a href="login.html">Sign in</a></li><li><a href="signup.html">Sign up</a></li></ul></div>
+  </div>
+  <div class="copy">© 2026 Laleh · Plan it. Style it. Own your look.</div>
+</footer>
+
+<script src="js/finesse.js"></script>
+<script>
+document.getElementById('contact-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const msgEl = document.getElementById('contact-msg');
+  const name = document.getElementById('name').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const subject = document.getElementById('subject').value.trim();
+  const message = document.getElementById('message').value.trim();
+
+  const composed = [
+    subject ? `Subject: ${subject}` : '',
+    name ? `Name: ${name}` : '',
+    email ? `Email: ${email}` : '',
+    `Message: ${message}`
+  ].filter(Boolean).join('\n');
+
+  const r = await F.post(F.api + '/feedback.php', { message: composed });
+  if (r.ok) {
+    msgEl.className = 'msg ok';
+    msgEl.textContent = 'Thanks — your feedback has been sent.';
+    e.target.reset();
+  } else {
+    msgEl.className = 'msg err';
+    msgEl.textContent = r.msg || 'Could not send message.';
+  }
+});
+</script>
+</body>
+</html>

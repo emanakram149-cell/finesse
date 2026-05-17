@@ -1,0 +1,50 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Diva Studio · Laleh</title>
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/finesse.css">
+</head><body>
+<div class="app-shell">
+  <div id="sidebar-slot"></div>
+  <main class="app-main">
+    <div class="app-top">
+      <div><span class="eyebrow">Compose</span><h1>Diva Studio</h1></div>
+      <div class="right">
+        <button class="btn-icon" onclick="rotateMannequin(-1)" title="Rotate left">↺</button>
+        <button class="btn-icon" onclick="rotateMannequin(1)" title="Rotate right">↻</button>
+        <button class="btn btn-ghost" onclick="autoCompose()">✦ Auto-style</button>
+        <button class="btn btn-gold" onclick="saveOutfit()">Save Look</button>
+      </div>
+    </div>
+
+    <div class="diva-wrap">
+      <div class="mannequin" id="mannequin">
+        <div class="canvas-hint">Drop pieces here to build your look</div>
+        <div class="slot full" data-slot="full" data-label=""></div>
+        <div class="slot top" data-slot="top" data-label="TOP">TOP</div>
+        <div class="slot bottom" data-slot="bottom" data-label="BOTTOM">BOTTOM</div>
+        <div class="slot shoes" data-slot="shoes" data-label="SHOES">SHOES</div>
+        <div class="slot acc" data-slot="acc" data-label="ACC">ACC</div>
+      </div>
+
+      <div class="diva-side">
+        <h3>Your Closet</h3>
+        <p class="muted" style="font-size:.85rem;margin-bottom:1rem">Drag pieces onto the mannequin.</p>
+        <div class="diva-pool" id="diva-pool"></div>
+        <div class="diva-actions">
+          <button class="btn btn-ghost" onclick="clearLook()" style="flex:1;justify-content:center">Clear</button>
+        </div>
+        <div class="card" style="margin-top:1.5rem">
+          <h4 style="font-family:var(--font-display);margin-bottom:.5rem">Stylist tip</h4>
+          <p class="muted" style="font-size:.85rem">Pair gold accessories with ivory and beige for an editorial daytime look.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+<div id="floating-slot"></div>
+<script src="js/finesse.js"></script>
+<script>document.getElementById('sidebar-slot').outerHTML = F.renderChrome('diva');</script>
+<script src="js/diva.js"></script>
+</body></html>
